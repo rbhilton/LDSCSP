@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnGetHTML;
     TextView txvSpanish, txvEnglish;
+    EditText edtTalkURL;
     String language = "spa";
     String url = "";
 
@@ -40,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
         btnGetHTML = (Button) findViewById(R.id.btnGetHTML);
         txvEnglish = (TextView) findViewById(R.id.txvEnglish);
         txvSpanish = (TextView) findViewById(R.id.txvSpanish);
+        edtTalkURL = (EditText) findViewById(R.id.edtTalkURL);
+        edtTalkURL.setText("https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=");
 
         btnGetHTML.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                url = "https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=" + language;
+                url = edtTalkURL.getText().toString() + language;
                 //new getWebPage().execute("");
                 //getEnglish("https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=eng");
                 new getConfTalk().execute(url);
@@ -82,10 +86,9 @@ public class MainActivity extends AppCompatActivity {
             if (language.equals("spa")) {
                 txvSpanish.setText(s);
                 language = "eng";
-                url = "https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=" + language;
+                url = edtTalkURL.getText().toString() + language;
                 new getConfTalk().execute(url);
             }
-
 
         }
     }
