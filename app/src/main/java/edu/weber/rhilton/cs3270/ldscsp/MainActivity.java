@@ -25,7 +25,9 @@ import javax.net.ssl.HttpsURLConnection;
 public class MainActivity extends AppCompatActivity {
 
     Button btnGetHTML;
-    TextView txvHTMLResults;
+    TextView txvSpanish, txvEnglish;
+    String language = "spa";
+    String url = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +38,17 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         btnGetHTML = (Button) findViewById(R.id.btnGetHTML);
-        txvHTMLResults = (TextView) findViewById(R.id.txvHTMLResults);
+        txvEnglish = (TextView) findViewById(R.id.txvEnglish);
+        txvSpanish = (TextView) findViewById(R.id.txvSpanish);
 
         btnGetHTML.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=spa";
+                url = "https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=" + language;
                 //new getWebPage().execute("");
                 //getEnglish("https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=eng");
                 new getConfTalk().execute(url);
+
 
             }
         });
@@ -72,8 +76,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            Log.d("test","onPostExecute: language=" + language);
+            if (language.equals("eng")) txvEnglish.setText(s);
 
-            txvHTMLResults.setText(s);
+            if (language.equals("spa")) {
+                txvSpanish.setText(s);
+                language = "eng";
+                url = "https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=" + language;
+                new getConfTalk().execute(url);
+            }
+
+
         }
     }
 
@@ -115,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             // Executed when the AsyncTask completes
             super.onPostExecute(result);
 
-            txvHTMLResults.setText(result);
+            txvEnglish.setText(result);
 
         }
 
@@ -126,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("test","MainActivity getEnglish(" + url + ")");
         try {
             Document doc = Jsoup.connect(url).get();
-            txvHTMLResults.setText(doc.toString());
+            txvEnglish.setText(doc.toString());
         } catch (IOException iox) {
 
         }
