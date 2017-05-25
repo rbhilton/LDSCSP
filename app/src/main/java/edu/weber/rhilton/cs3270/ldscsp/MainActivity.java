@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
+import org.jsoup.examples.HtmlToPlainText;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -40,9 +41,10 @@ public class MainActivity extends AppCompatActivity {
         btnGetHTML.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String url = "https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=spa";
                 //new getWebPage().execute("");
                 //getEnglish("https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=eng");
-                new getConfTalk().execute("https://www.lds.org/general-conference/2017/04/gathering-the-family-of-god?lang=eng");
+                new getConfTalk().execute(url);
 
             }
         });
@@ -54,11 +56,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             String rawHTML = "";
-            Log.d("test","MainActivity getEnglish(" + strings[0] + ")");
+            Log.d("test","MainActivity getConfTalk(" + strings[0] + ")");
             try {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Element talk = doc.select("div.body-block").first();
-                rawHTML = talk.html();
+                HtmlToPlainText worker = new HtmlToPlainText();
+                rawHTML = worker.getPlainText(talk);
             } catch (IOException iox) {
 
             }
