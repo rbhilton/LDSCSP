@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnGetHTML;
     TextView txvSpanish, txvEnglish;
     EditText edtTalkURL;
+    ScrollView scrSpanish, scrEnglish;
     String language = "spa";
     String url = "";
 
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         btnGetHTML = (Button) findViewById(R.id.btnGetHTML);
+        scrSpanish = (ScrollView) findViewById(R.id.scrSpanish);
+        scrEnglish = (ScrollView) findViewById(R.id.scrEnglish);
         txvEnglish = (TextView) findViewById(R.id.txvEnglish);
         txvSpanish = (TextView) findViewById(R.id.txvSpanish);
         edtTalkURL = (EditText) findViewById(R.id.edtTalkURL);
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        
     }
 
 
