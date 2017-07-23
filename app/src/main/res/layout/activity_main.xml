@@ -4,52 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="12dp"
     tools:context="edu.weber.rhilton.cs3270.ldscsp.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="General Conference" />
-    <EditText
-        android:id="@+id/edtTalkURL"
+    <FrameLayout
+        android:id="@+id/mainContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btnGetHTML"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Get Talk" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ScrollView
-            android:id="@+id/scrSpanish"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/txvSpanish"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Empty" />
-        </ScrollView>
-        <ScrollView
-            android:id="@+id/scrEnglish"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/txvEnglish"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Empty" />
-        </ScrollView>
-
-    </LinearLayout>
-
-
-
+        android:layout_height="match_parent"></FrameLayout>
 
 </LinearLayout>
