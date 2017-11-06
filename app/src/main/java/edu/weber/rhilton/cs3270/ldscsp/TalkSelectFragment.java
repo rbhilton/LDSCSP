@@ -34,6 +34,7 @@ public class TalkSelectFragment extends Fragment {
 
     View rootView;
     ListView lsvTalkLinks;
+    String confYr = "2017", confMo="04";
 
     public TalkSelectFragment() {
         // Required empty public constructor
@@ -52,11 +53,15 @@ public class TalkSelectFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MainActivity ma = (MainActivity) getActivity();
-                ma.setTalk(adapterView.getItemAtPosition(i).toString());
+                ma.setTalkURL(adapterView.getItemAtPosition(i).toString());
             }
         });
 
-        new getConfTalks().execute("https://www.lds.org/general-conference?lang=eng");
+        MainActivity ma = (MainActivity) getActivity();
+        confYr = ma.getConfYear();
+        confMo = ma.getConfMonth();
+        new getConfTalks().execute("https://www.lds.org/general-conference/"
+                + confYr + "/" + confMo + "?lang=eng");
 
         return rootView;
     }
@@ -70,10 +75,10 @@ public class TalkSelectFragment extends Fragment {
             Document doc = new Document("");
             try {
                 doc = Jsoup.connect(strings[0]).get();
-                Log.d("test","returned doc: " + doc.data().length());
+                //Log.d("test","returned doc: " + doc.data().length());
                 rawHTML = doc.outerHtml();
             } catch (IOException iox) {
-                Log.d("test","getConfTalks doInBackground() IOException: " + iox.getMessage());
+                //Log.d("test","getConfTalks doInBackground() IOException: " + iox.getMessage());
 
             }
 
@@ -83,7 +88,7 @@ public class TalkSelectFragment extends Fragment {
         @Override
         protected void onPostExecute(Document doc) {
             super.onPostExecute(doc);
-            Log.d("test","onPostExecute() html length: " + doc.outerHtml().length());
+            //Log.d("test","onPostExecute() html length: " + doc.outerHtml().length());
             Elements els = doc.select(" a.lumen-tile__link");
             ArrayList<String> links = new ArrayList<String>();
             int index = -1;
@@ -95,7 +100,7 @@ public class TalkSelectFragment extends Fragment {
                     //Log.d("test","lumen-tile__link: " + links.get(links.size()-1));
                 }
             }
-            Log.d("test","Number of links = " + links.size());
+            //Log.d("test","Number of links = " + links.size());
             ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,links);
             lsvTalkLinks.setAdapter(adapter);
         }
