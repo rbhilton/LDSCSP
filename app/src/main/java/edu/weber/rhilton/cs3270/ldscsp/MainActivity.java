@@ -38,7 +38,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class MainActivity extends AppCompatActivity {
 
     String _talkURL = "";
-    String _confYear = "2017";
+    String _confYear = "2018";
     String _confMonth = "04";
     String _confTalk = "";
     String _lang = "spa";
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         SharedPreferences sp = getSharedPreferences("LDSCSP",MODE_PRIVATE);
-        _confYear = sp.getString("confYear","2017");
+        _confYear = sp.getString("confYear","2018");
         _confMonth = sp.getString("confMonth","10");
         _confTalk = sp.getString("confTalk","");
         _talkURL = sp.getString("confTalkURL","");

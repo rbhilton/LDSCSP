@@ -34,7 +34,7 @@ public class TalkSelectFragment extends Fragment {
 
     View rootView;
     ListView lsvTalkLinks;
-    String confYr = "2017", confMo="04";
+    String confYr = "2018", confMo="10";
 
     public TalkSelectFragment() {
         // Required empty public constructor
